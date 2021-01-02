@@ -1,20 +1,16 @@
 #include <Adafruit_NeoPixel.h>
 
-static const int LEDS = 360;
 static const int PIN = 10;
 
 
-Adafruit_NeoPixel list = Adafruit_NeoPixel(LEDS, PIN, NEO_GRB);
+Adafruit_NeoPixel list;
+int LEDS;
 
-int delay_time = 800;
-// Gamingstation 80
-int hue_step = 80; 
-//Gamingstation 800
-// 5m slinga = 80
-float bright_slowdown = 100;
-// Gamingstatin 1
-int bright_max = 5;
-// Gaming 100
+
+int delay_time;
+int hue_step; 
+float bright_slowdown;
+int bright_max;
 
 
 uint16_t colour_hue = 0;
@@ -24,12 +20,42 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, LOW);
-  
+
+  setupGamingStation();
+
   list.begin();
   list.clear();
 
   list.show();
 }
+
+void setupGamingStation() {
+  LEDS = 60;
+  delay_time = 80;
+  hue_step = 800; 
+  bright_slowdown = 1;
+  bright_max = 100;  
+  list = Adafruit_NeoPixel(LEDS, PIN, NEO_GRB);
+}
+
+void setupSofa() {
+  LEDS = 60;
+  delay_time = 80;
+  hue_step = 800; 
+  bright_slowdown = 100;
+  bright_max = 5;  
+  list = Adafruit_NeoPixel(LEDS, PIN, NEO_GRB);
+}
+
+void setup5m() {
+  LEDS = 360;
+  delay_time = 800;
+  hue_step = 80; 
+  bright_slowdown = 1;
+  bright_max = 5;  
+  list = Adafruit_NeoPixel(LEDS, PIN, NEO_GRB);
+}
+
 
 void loop() {
   // put your main code here, to run repeatedly:
